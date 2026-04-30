@@ -19,8 +19,8 @@ if menu == "Home":
 
     # Imagen (puedes usar una URL o archivo local)
     #st.image("C:\Users\DIEGO\OneDrive\Escritorio\DMC\logo.png", width=150)
-    ruta=r"C:\Users\DIEGO\OneDrive\Documents\trabajo DMC\logo.png"
-    st.image(ruta, width=150)
+    #ruta=r"C:\Users\DIEGO\OneDrive\Documents\trabajo DMC\logo.png"
+    st.image("logo.png", width=150)
     st.write("### Información del estudiante")
     st.write("**Nombre:** Diego Eduardo Montané Quintana")
     st.write("**Módulo:** Módulo 1 - Fundamentos de Programación")
