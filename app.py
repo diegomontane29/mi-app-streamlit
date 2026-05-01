@@ -155,13 +155,11 @@ elif menu == "Ejercicio 3":
     if "historial_margen" not in st.session_state:
         st.session_state.historial_margen = []
 
-    # Inputs
     ingresos = st.number_input("Ingresos", min_value=0.0, step=100.0)
     costos = st.number_input("Costos", min_value=0.0, step=100.0)
     gastos_operativos = st.number_input("Gastos operativos", min_value=0.0, step=100.0)
     impuestos = st.number_input("Impuestos", min_value=0.0, step=100.0)
 
-    # Botón con key (evita problemas de rerun)
     if st.button("Calcular margen neto", key="btn_margen_neto"):
 
         try:
@@ -179,7 +177,6 @@ elif menu == "Ejercicio 3":
             st.write(f"📉 Utilidad neta: {resultado['utilidad_neta']}")
             st.write(f"📊 Margen neto (%): {resultado['margen_neto_pct']}%")
 
-            # Evitar duplicados exactos
             nuevo = {
                 "Ingresos": ingresos,
                 "Costos": costos,
@@ -196,7 +193,6 @@ elif menu == "Ejercicio 3":
         except Exception as e:
             st.error(f"Error al calcular: {e}")
 
-    # Mostrar historial
     if len(st.session_state.historial_margen) > 0:
         st.subheader("📊 Historial de cálculos")
 
@@ -213,11 +209,9 @@ elif menu == "Ejercicio 4":
 
     from libreria_clases_proyecto1 import ProyectoInversion
 
-    # ---------------- HISTORIAL ----------------
     if "historial_proyectos" not in st.session_state:
         st.session_state.historial_proyectos = []
 
-    # ---------------- INPUTS ----------------
     nombre = st.text_input("Nombre del proyecto", key="nombre_proyecto")
 
     inversion = st.number_input("Inversión inicial", min_value=0.0, step=100.0, key="inversion")
@@ -230,7 +224,6 @@ elif menu == "Ejercicio 4":
         placeholder="Ejemplo: 1000,1200,1500"
     )
 
-    # Convertir flujos de forma segura
     flujos = []
     if flujos_texto:
         try:
@@ -254,8 +247,6 @@ elif menu == "Ejercicio 4":
                 resultado = proyecto.resumen()
 
                 st.success("Evaluación completada")
-
-                # Mostrar resultados
                 st.write("### 📊 Resultados")
                 st.write(f"📌 Proyecto: {resultado['proyecto']}")
                 st.write(f"💰 VPN: {resultado['vpn']}")
@@ -263,7 +254,6 @@ elif menu == "Ejercicio 4":
                 st.write(f"⏳ Payback: {resultado['payback_anios']} años")
                 st.write(f"🎯 Decisión: {resultado['decision']}")
 
-                # ---------------- EVITAR DUPLICADOS ----------------
                 if resultado not in st.session_state.historial_proyectos:
                     st.session_state.historial_proyectos.append(resultado)
 
@@ -273,7 +263,6 @@ elif menu == "Ejercicio 4":
         else:
             st.warning("Completa todos los campos correctamente")
 
-    # ---------------- HISTORIAL ----------------
     if len(st.session_state.historial_proyectos) > 0:
 
         st.subheader("📋 Historial de proyectos")
