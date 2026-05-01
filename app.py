@@ -103,24 +103,18 @@ elif menu == "Ejercicio 2":
     Este módulo permite registrar productos usando arrays de NumPy y visualizar los datos en un DataFrame actualizado.
     """)
 
-
-
-    # Inicializar array en session_state
     if "productos" not in st.session_state:
         st.session_state.productos = np.empty((0, 5), dtype=object)
 
-    # Inputs con key para evitar duplicación
     nombre = st.text_input("Nombre del producto", key="nombre_producto")
     categoria = st.selectbox("Categoría", ["Abarrotes", "Tecnología", "Ropa", "Otros"], key="categoria_producto")
     precio = st.number_input("Precio", min_value=0.0, step=1.0, key="precio_producto")
     cantidad = st.number_input("Cantidad", min_value=0, step=1, key="cantidad_producto")
 
-    # Cálculo del total
     total = precio * cantidad
 
     st.write(f"💰 Total calculado: **{total}**")
 
-    # Botón agregar (controlado)
     if st.button("Agregar producto", key="btn_agregar_producto"):
 
         if nombre != "" and precio > 0 and cantidad > 0:
@@ -137,7 +131,6 @@ elif menu == "Ejercicio 2":
         else:
             st.error("Completa todos los campos correctamente")
 
-    # Mostrar DataFrame
     if st.session_state.productos.shape[0] > 0:
 
         df = pd.DataFrame(
@@ -147,7 +140,6 @@ elif menu == "Ejercicio 2":
 
         st.subheader("📊 Inventario de productos")
         st.dataframe(df)
-
 
 
 # ---------------- EJERCICIO 3 ----------------
@@ -160,9 +152,6 @@ elif menu == "Ejercicio 3":
 
     import libreria_funciones_proyecto1 as lf
 
-    import pandas as pd
-
-    # Inicializar historial
     if "historial_margen" not in st.session_state:
         st.session_state.historial_margen = []
 
