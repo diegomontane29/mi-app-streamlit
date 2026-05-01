@@ -4,7 +4,6 @@ import numpy as np
 
 st.set_page_config(page_title="Proyecto Streamlit", layout="wide")
 
-# Menú lateral
 menu = st.sidebar.selectbox(
     "Menú de navegación",
     ["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"]
