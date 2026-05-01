@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Configuración de la página
 st.set_page_config(page_title="Proyecto Streamlit", layout="wide")
 
 # Menú lateral
@@ -11,14 +10,11 @@ menu = st.sidebar.selectbox(
     ["Home", "Ejercicio 1", "Ejercicio 2", "Ejercicio 3", "Ejercicio 4"]
 )
 
-# ---------------- HOME ----------------
 if menu == "Home":
     st.title("Aplicación en Streamlit")
 
     st.subheader("Fundamentos de programación")
 
-    # Imagen (puedes usar una URL o archivo local)
-    #st.image("C:\Users\DIEGO\OneDrive\Escritorio\DMC\logo.png", width=150)
     #ruta=r"C:\Users\DIEGO\OneDrive\Documents\trabajo DMC\logo.png"
     st.image("logo.png", width=150)
     st.write("### Información del estudiante")
@@ -54,17 +50,14 @@ elif menu == "Ejercicio 1":
     Puedes ingresar un concepto, seleccionar el tipo de movimiento y su valor.
     El sistema calculará automáticamente el flujo de caja.
     """)
-
-    # Inicializar lista en session_state
+    
     if "movimientos" not in st.session_state:
         st.session_state.movimientos = []
-
-    # Inputs
+    
     concepto = st.text_input("Concepto")
     tipo = st.selectbox("Tipo de movimiento", ["Ingreso", "Gasto"])
     valor = st.number_input("Valor", min_value=0.0, step=1.0)
 
-    # Botón para agregar
     if st.button("Agregar movimiento"):
         if concepto != "" and valor > 0:
             movimiento = {
@@ -77,12 +70,10 @@ elif menu == "Ejercicio 1":
         else:
             st.error("Debes completar todos los campos correctamente")
 
-    # Mostrar tabla
     if st.session_state.movimientos:
         st.subheader("📋 Movimientos registrados")
         st.dataframe(st.session_state.movimientos)
 
-        # Cálculos
         ingresos = sum(m["Valor"] for m in st.session_state.movimientos if m["Tipo"] == "Ingreso")
         gastos = sum(m["Valor"] for m in st.session_state.movimientos if m["Tipo"] == "Gasto")
         saldo = ingresos - gastos
@@ -95,7 +86,6 @@ elif menu == "Ejercicio 1":
         col2.metric("Gastos", f"S/ {gastos:.2f}")
         col3.metric("Saldo", f"S/ {saldo:.2f}")
 
-        # Estado del flujo de caja
         if saldo > 0:
             st.success("El flujo de caja está A FAVOR ✅")
         elif saldo < 0:
